@@ -1,0 +1,8 @@
+IF
+	See([PC])
+	!Allegiance(Myself,ENEMY)
+	Global("BrageRiddle","GLOBAL",0)
+THEN
+	RESPONSE #100
+		Dialogue([PC])
+END

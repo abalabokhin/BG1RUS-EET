@@ -1,0 +1,388 @@
+BACKUP ~bgeetextpack\backup~
+AUTHOR ~Prozh~
+
+VERSION ~v1.9~
+
+BEGIN ~Full Russian text for BG:Enhanced Edition v2.6.6.0~
+
+STRING_SET_RANGE #0 #24631 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #24634 #24683 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #24723 #24724 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #24729 #32282 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #32284 #32313 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #32319 #32330 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #32332 #32334 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #32337 #33236 USING ~bgeetextpack\tra\bgee.tra~
+
+COPY ~bgeetextpack/L_ru_RU.LUA~   ~override/L_ru_RU.LUA~
+
+COPY_EXISTING ~thief.cre~ ~override~
+                            ~thiefg.cre~ ~override~
+                            ~thiefm.cre~ ~override~
+  SAY NAME1 #14171
+  SAY NAME2 #14171
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~thieff.cre~ ~override~
+  SAY NAME1 #14172
+  SAY NAME2 #14172
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~sewerf1.cre~ ~override~
+                            ~sewerf2.cre~ ~override~
+                            ~sewerf3.cre~ ~override~
+                            ~sewerf4.cre~ ~override~
+  SAY NAME1 #19942
+  SAY NAME2 #19942
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~sewerf5.cre~ ~override~
+  SAY NAME1 #19943
+  SAY NAME2 #19943
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~leaggu1.cre~ ~override~
+                            ~leaggu4.cre~ ~override~
+                            ~leaggu5.cre~ ~override~
+                            ~leaggu6.cre~ ~override~
+                            ~leaggu7.cre~ ~override~
+  SAY NAME1 #22188
+  SAY NAME2 #22188
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~leaggu2.cre~ ~override~
+                            ~leaggu3.cre~ ~override~
+  SAY NAME1 #22189
+  SAY NAME2 #22189
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~cult4.cre~ ~override~
+  SAY NAME1 #22710
+  SAY NAME2 #22710
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~cultt4.cre~ ~override~
+  SAY NAME1 #22711
+  SAY NAME2 #22711
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~narrat.cre~ ~override~
+                            ~narrat2.cre~ ~override~
+  SAY NAME1 #60
+  SAY NAME2 #60
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING mtob7.cre override
+  WRITE_LONG 0x19c 0xffffffff
+BUT_ONLY
+
+COPY_EXISTING ~misc55.itm~ ~override~
+  WRITE_LONG 0x4c 175 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~misc65.itm~ ~override~
+  WRITE_LONG 0x4c 185 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~misc60.itm~ ~override~
+	            ~misc47.itm~ ~override~
+  WRITE_LONG 0x4c 1 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ax1h04.itm~ ~override~
+  WRITE_LONG 0x4c 5 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~misc2o.itm~ ~override~
+	            ~misc51.itm~ ~override~
+  WRITE_LONG 0x4c 0 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~leat10.itm~ ~override~
+  READ_LONG  0x64 "abil_off"
+  READ_SHORT 0x68 "abil_num"
+  READ_LONG  0x6a "fx_off"
+  READ_SHORT 0x70 "fx_num"
+  SET "new_fx" = 1
+  WRITE_SHORT 0x70 ("%fx_num%" + "%new_fx%")
+  WHILE ("%abil_num%" > 0) BEGIN
+    SET "abil_num" = ("%abil_num%" - 1)
+    READ_SHORT  ("%abil_off%" + 0x20 + ("%abil_num%" * 0x38)) "abil_fx_idx"
+    WRITE_SHORT ("%abil_off%" + 0x20 + ("%abil_num%" * 0x38)) ("%abil_fx_idx%" + "%new_fx%") // adding new global effects
+  END
+  INSERT_BYTES  ("%fx_off%"       ) 0x30 // new effect
+    WRITE_SHORT ("%fx_off%"       ) 275  // hide in shadows
+    WRITE_BYTE  ("%fx_off%" + 0x02) 1    // target: self
+    WRITE_LONG  ("%fx_off%" + 0x04) 0xffffffec    // value (-20)
+    WRITE_LONG  ("%fx_off%" + 0x08) 0   // increment
+    WRITE_BYTE  ("%fx_off%" + 0x0c) 2    // instant/while equipped
+    WRITE_BYTE  ("%fx_off%" + 0x0d) 0    // not dispel/not bypass
+    WRITE_BYTE  ("%fx_off%" + 0x12) 100  // probability
+
+COPY_EXISTING ~potn41.itm~   ~override~
+  READ_LONG  0x64 "abil_off" ELSE 0
+  READ_SHORT 0x68 "abil_num" ELSE 0
+  READ_LONG  0x6a "fx_off"   ELSE 0
+  SET "abil_length" = 0x38
+  SET "fx_delta" = 0
+  FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+    READ_SHORT  ("%abil_off%" + 0x1e + ("%abil_length%" * "%index%")) "abil_fx_num"
+    READ_SHORT  ("%abil_off%" + 0x20 + ("%abil_length%" * "%index%")) "abil_fx_idx"
+    SET "abil_fx_idx" = ("%abil_fx_idx%" + "%fx_delta%")
+    WRITE_SHORT ("%abil_off%" + 0x20 + ("%abil_length%" * "%index%")) ("%abil_fx_idx%")
+    FOR (index2 = 0 ; index2 < abil_fx_num ; index2 = index2 + 1) BEGIN
+      READ_SHORT ("%fx_off%" +        (0x30 * ("%abil_fx_idx%" + "%index2%"))) "opcode"
+      PATCH_IF ("%opcode%" = 275) BEGIN
+        READ_ASCII ("%fx_off%" +        (0x30 * ("%abil_fx_idx%" + "%index2%"))) "clone" (48)
+        INSERT_BYTES            ("%fx_off%" +        (0x30 * "%abil_fx_idx%")) 0x30
+          WRITE_EVALUATED_ASCII ("%fx_off%" +        (0x30 * "%abil_fx_idx%")) "%clone%"
+          WRITE_SHORT           ("%fx_off%" +        (0x30 * "%abil_fx_idx%")) 59 // move silently
+        SET "fx_delta" = "%fx_delta%" + 1
+        SET "abil_fx_num" = "%abil_fx_num%" + 1
+        WRITE_SHORT  ("%abil_off%" + 0x1e + ("%abil_length%" * "%index%")) "%abil_fx_num%"
+        SET "index2" = "%abil_fx_num%"
+      END
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~shld03.itm~ ~override~
+                            ~shld13.itm~ ~override~
+                            ~shld14.itm~ ~override~
+                            ~shld32.itm~ ~override~
+  WRITE_LONG 0x4c 7 // weight
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~clck07.itm~ ~override~
+  READ_LONG   0x64 "abil_off"
+  READ_SHORT  0x68 "abil_num"
+  FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+    READ_BYTE ("%abil_off%" +        ("%index%" * 0x38)) "abiltype"
+    PATCH_IF ("%abiltype%" = 3) BEGIN // magical
+      WRITE_SHORT ("%abil_off%" + 0x22 + ("%index%" * 0x38)) 1 // charges
+      WRITE_BYTE ("%abil_off%" + 0x27 + ("%index%" * 0x38)) 0b00001010 // recharge after resting
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~wolfgr.itm~ ~override~
+  READ_LONG  0x6a "fx_off"
+  READ_SHORT 0x70 "fx_num"
+  WHILE ("%fx_num%" > 0) BEGIN
+    SET "fx_num" = ("%fx_num%" - 1)
+    READ_SHORT ("%fx_off%" + ("%fx_num%" * 0x30)) "type"
+    PATCH_IF ("%type%" = 120) BEGIN
+      WRITE_BYTE ("%fx_off%" + 0x04 + ("%fx_num%" * 0x30)) 0 // enchantment
+      WRITE_BYTE ("%fx_off%" + 0x08 + ("%fx_num%" * 0x30)) 2 // weapon type
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~wolfgr.itm~ ~override~
+  READ_LONG  0x6a "fx_off"
+  READ_SHORT 0x70 "fx_num"
+  WHILE ("%fx_num%" > 0) BEGIN
+    SET "fx_num" = ("%fx_num%" - 1)
+    READ_SHORT ("%fx_off%" + ("%fx_num%" * 0x30)) "type"
+    PATCH_IF ("%type%" = 98) BEGIN
+      WRITE_BYTE ("%fx_off%" + 0x04 + ("%fx_num%" * 0x30)) 6 // value
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~chan06.itm~ ~override~
+	            ~chan12.itm~ ~override~
+  READ_BYTE  0x2d "use"
+  WRITE_BYTE 0x2d ("%use%" BAND 0b01111111) // removes archer flag
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~chan06.itm~ ~override~
+	            ~chan12.itm~ ~override~
+  READ_BYTE  0x2b "use"
+  WRITE_BYTE 0x2b ("%use%" BAND 0b11111110) // removes stalker flag
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~stafn1.itm~ ~override~
+   READ_LONG   0x64 "abil_off"
+   READ_SHORT  0x68 "abil_num"
+   READ_LONG   0x6a "fx_off"
+   WHILE ("%abil_num%" > 0) BEGIN
+     SET "abil_num" = ("%abil_num%" - 1)
+     READ_BYTE   ("%abil_off%" +        ("%abil_num%" * 0x38)) "type"
+     PATCH_IF ("%type%" = 1) BEGIN // melee ability check
+       READ_SHORT  ("%abil_off%" + 0x1e + ("%abil_num%" * 0x38)) "abil_fx_num"
+       READ_SHORT  ("%abil_off%" + 0x20 + ("%abil_num%" * 0x38)) "abil_fx_idx"
+       WHILE ("%abil_fx_num%" > 0) BEGIN
+         SET "abil_fx_num" = ("%abil_fx_num%" - 1)
+         READ_SHORT ("%fx_off%" +        (("%abil_fx_idx%" + "%abil_fx_num%") * 0x30)) "opcode"
+         READ_SHORT  ("%fx_off%" + 0x02 + (("%abil_fx_idx%" + "%abil_fx_num%") * 0x30)) "target"
+         PATCH_IF (("%opcode%" = 12) AND ("%target%" = 1)) BEGIN
+           WRITE_BYTE ("%fx_off%" + 0x12 + (("%abil_fx_idx%" + "%abil_fx_num%") * 0x30)) 20 // probability
+           WRITE_BYTE ("%fx_off%" + 0x13 + (("%abil_fx_idx%" + "%abil_fx_num%") * 0x30)) 11 // probability
+         END
+       END
+     END
+    END
+    BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~misc78.itm~ ~override~
+	            ~scrljala.itm~ ~override~
+  WRITE_BYTE  0x1c 0 // cathegory
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ring27.itm~ ~override~
+  READ_LONG  0x64 "abil_off"
+  READ_SHORT 0x68 "abil_num"
+  READ_LONG  0x6a "fx_off"
+  FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+    READ_SHORT  ("%abil_off%" + 0x1e + ("%index%" * 0x38)) "abil_fx_num"
+    READ_SHORT  ("%abil_off%" + 0x20 + ("%index%" * 0x38)) "abil_fx_idx"
+    FOR (index2 = 0 ; index2 < abil_fx_num ; index2 = index2 + 1) BEGIN
+      READ_SHORT ("%fx_off%" +        (("%abil_fx_idx%" + "%index2%") * 0x30)) "opcode"
+      PATCH_IF ("%opcode%" = 146) BEGIN // cast spell at point
+        WRITE_BYTE  ("%fx_off%" + 0x08  + (("%abil_fx_idx%" + "%index2%") * 0x30)) 2 // cast instantly
+      END
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~sw1h53.itm~ ~override~
+  SAY NAME2 #32382
+  SAY DESC #32383
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~bag02g.sto~ ~override~
+	            ~bag02h.sto~ ~override~
+	            ~bag02i.sto~ ~override~
+  WRITE_SHORT 0x22 100 // capacity
+  BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~bgeetextpack/baf/xginitd.baf~
+
+COPY_EXISTING ~baresh.cre~ ~override~
+	            ~borda.cre~ ~override~
+	            ~brilla.cre~ ~override~
+	            ~caedmo.cre~ ~override~
+	            ~calaha.cre~ ~override~
+	            ~cauter.cre~ ~override~
+	            ~desslo.cre~ ~override~
+	            ~dink.cre~ ~override~
+	            ~dratan.cre~ ~override~
+	            ~flam4.cre~ ~override~
+	            ~gord.cre~ ~override~
+	            ~housg4.cre~ ~override~
+	            ~iron7.cre~ ~override~
+	            ~iron8.cre~ ~override~
+	            ~jamie.cre~ ~override~
+	            ~jonavi.cre~ ~override~
+	            ~lestor.cre~ ~override~
+	            ~meilum.cre~ ~override~
+	            ~mendas.cre~ ~override~
+	            ~mendas2.cre~ ~override~
+	            ~reevor3.cre~ ~override~
+	            ~shep.cre~ ~override~
+	            ~slavlead.cre~ ~override~
+	            ~tick.cre~ ~override~
+	            ~triado.cre~ ~override~
+	            ~ulf.cre~ ~override~
+	            ~vax.cre~ ~override~
+	            ~viconi.cre~ ~override~
+	            ~viconi4.cre~ ~override~
+	            ~viconi6.cre~ ~override~
+  WRITE_ASCII 0x250 ~xginitd~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~bounty.cre~ ~override~
+	            ~bub.cre~ ~override~
+	            ~delain2.cre~ ~override~
+	            ~dradee2.cre~ ~override~
+	            ~durlyl2.cre~ ~override~
+	            ~forthe.cre~ ~override~
+	            ~golinv.cre~ ~override~
+	            ~helsha.cre~ ~override~
+	            ~islsir.cre~ ~override~
+	            ~keshee.cre~ ~override~
+	            ~larria.cre~ ~override~
+	            ~meym.cre~ ~override~
+	            ~palin.cre~ ~override~
+	            ~ramazi.cre~ ~override~
+	            ~riggilo.cre~ ~override~
+	            ~rodnim.cre~ ~override~
+	            ~slavtell.cre~ ~override~
+	            ~smuggl.cre~ ~override~
+	            ~taloun.cre~ ~override~
+  WRITE_ASCII 0x248 ~xginitd~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~phanda.cre~ ~override~
+  WRITE_ASCII 0x258 ~xginitd~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~tremai.cre~ ~override~
+  WRITE_ASCII 0x260 ~xginitd~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~brage.bcs~ ~override~
+    REPLACE_BCS_BLOCK ~bgeetextpack/baf/obrage.baf~ ~bgeetextpack/baf/nbrage.baf~
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~dabron.bcs~ ~override~
+    REPLACE_BCS_BLOCK ~bgeetextpack/baf/odabron.baf~ ~bgeetextpack/baf/ndabron.baf~
+  BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~bgeetextpack/dlgfix.d~
+
+BEGIN ~Complete Russian fonts set~
+MKDIR ~lang/ru_RU/fonts~
+
+// BG1:EE fonts
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/NORMAL.ttf~
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/POSTANTI.ttf~
+COPY ~bgeetextpack/fonts/REALMS.ttf~   ~override/REALMS.ttf~
+COPY ~bgeetextpack/fonts/STONESML.ttf~   ~override/MODESTOM.ttf~
+COPY ~bgeetextpack/fonts/STONESML.ttf~   ~override/STONESML.ttf~
+COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~override/TOOLTIP.ttf~
+
+// SoD fonts
+COPY ~bgeetextpack/fonts/REALMS.ttf~   ~override/SHERWOOD.ttf~
+
+// IWD:EE fonts. There is no Russian STONEBIG in set, so just copy of NORMAL
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/STONEBIG.ttf~
+
+// Used in Dragonspear UI++
+COPY ~bgeetextpack/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
+
+// Used in lefreut's Enhanced UI
+COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~override/TOOLFONT.ttf~
+
+COPY ~bgeetextpack/M_RusFnt.lua~   ~override/M_RusFnt.lua~
+
+BEGIN ~Complete Russian fonts set in lang/ru_RU/fonts~
+MKDIR ~lang/ru_RU/fonts~
+
+// BG1:EE fonts
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/NORMAL.ttf~
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/POSTANTI.ttf~
+COPY ~bgeetextpack/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/REALMS.ttf~
+COPY ~bgeetextpack/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/MODESTOM.ttf~
+COPY ~bgeetextpack/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/STONESML.ttf~
+COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLTIP.ttf~
+
+// SoD fonts
+COPY ~bgeetextpack/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/SHERWOOD.ttf~
+
+// IWD:EE fonts. There is no Russian STONEBIG in set, so just copy of NORMAL
+COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/STONEBIG.ttf~
+
+// Used in Dragonspear UI++
+COPY ~bgeetextpack/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
+
+// Used in lefreut's Enhanced UI
+COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLFONT.ttf~
+
+COPY ~bgeetextpack/M_RusFnt.lua~   ~override/M_RusFnt.lua~
+
+BEGIN ~Remove Russian soundset to hear only English voices in the game~
+
+DELETE ~lang\ru_RU\data~
+DELETE ~lang\ru_RU\sounds~
