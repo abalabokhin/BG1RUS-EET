@@ -1,20 +1,20 @@
-BACKUP ~bgeetextpack\backup~
-AUTHOR ~Prozh~
+BACKUP ~bgeetextpackeetnames\backup~
+AUTHOR ~Prozh p_zombie paladin84~
 
-VERSION ~v1.10~
+VERSION ~v1.11~
 
-BEGIN ~Full Russian text for BG:Enhanced Edition v2.6.6.0~
+BEGIN ~Full Russian text for BG:Enhanced Edition v2.6.6.0 with EET names~
 
-STRING_SET_RANGE #0 #24631 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #24634 #24683 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #24723 #24724 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #24729 #32282 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #32284 #32313 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #32319 #32330 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #32332 #32334 USING ~bgeetextpack\tra\bgee.tra~
-STRING_SET_RANGE #32337 #33236 USING ~bgeetextpack\tra\bgee.tra~
+STRING_SET_RANGE #0 #24631 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #24634 #24683 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #24723 #24724 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #24729 #32282 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #32284 #32313 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #32319 #32330 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #32332 #32334 USING ~bgeetextpackeetnames\tra\bgee.tra~
+STRING_SET_RANGE #32337 #33236 USING ~bgeetextpackeetnames\tra\bgee.tra~
 
-COPY ~bgeetextpack/L_ru_RU.LUA~   ~override/L_ru_RU.LUA~
+COPY ~bgeetextpackeetnames/L_ru_RU.LUA~   ~override/L_ru_RU.LUA~
 
 COPY_EXISTING ~thief.cre~ ~override~
                             ~thiefg.cre~ ~override~
@@ -257,7 +257,7 @@ COPY_EXISTING ~bag02g.sto~ ~override~
   WRITE_SHORT 0x22 100 // capacity
   BUT_ONLY_IF_IT_CHANGES
 
-COMPILE ~bgeetextpack/baf/xginitd.baf~
+COMPILE ~bgeetextpackeetnames/baf/xginitd.baf~
 
 COPY_EXISTING ~baresh.cre~ ~override~
 	            ~borda.cre~ ~override~
@@ -323,64 +323,64 @@ COPY_EXISTING ~tremai.cre~ ~override~
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~brage.bcs~ ~override~
-    REPLACE_BCS_BLOCK ~bgeetextpack/baf/obrage.baf~ ~bgeetextpack/baf/nbrage.baf~
+    REPLACE_BCS_BLOCK ~bgeetextpackeetnames/baf/obrage.baf~ ~bgeetextpackeetnames/baf/nbrage.baf~
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~dabron.bcs~ ~override~
-    REPLACE_BCS_BLOCK ~bgeetextpack/baf/odabron.baf~ ~bgeetextpack/baf/ndabron.baf~
+    REPLACE_BCS_BLOCK ~bgeetextpackeetnames/baf/odabron.baf~ ~bgeetextpackeetnames/baf/ndabron.baf~
   BUT_ONLY_IF_IT_CHANGES
 
-COMPILE ~bgeetextpack/dlgfix.d~
+COMPILE ~bgeetextpackeetnames/dlgfix.d~
 
 BEGIN ~Complete Russian fonts set~
 MKDIR ~lang/ru_RU/fonts~
 
 // BG1:EE fonts
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/NORMAL.ttf~
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/POSTANTI.ttf~
-COPY ~bgeetextpack/fonts/REALMS.ttf~   ~override/REALMS.ttf~
-COPY ~bgeetextpack/fonts/STONESML.ttf~   ~override/MODESTOM.ttf~
-COPY ~bgeetextpack/fonts/STONESML.ttf~   ~override/STONESML.ttf~
-COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~override/TOOLTIP.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/NORMAL.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/POSTANTI.ttf~
+COPY ~bgeetextpackeetnames/fonts/REALMS.ttf~   ~override/REALMS.ttf~
+COPY ~bgeetextpackeetnames/fonts/STONESML.ttf~   ~override/MODESTOM.ttf~
+COPY ~bgeetextpackeetnames/fonts/STONESML.ttf~   ~override/STONESML.ttf~
+COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~override/TOOLTIP.ttf~
 
 // SoD fonts
-COPY ~bgeetextpack/fonts/REALMS.ttf~   ~override/SHERWOOD.ttf~
+COPY ~bgeetextpackeetnames/fonts/REALMS.ttf~   ~override/SHERWOOD.ttf~
 
 // IWD:EE fonts. There is no Russian STONEBIG in set, so just copy of NORMAL
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~override/STONEBIG.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/STONEBIG.ttf~
 
 // Used in Dragonspear UI++
-COPY ~bgeetextpack/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
+COPY ~bgeetextpackeetnames/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
 
 // Used in lefreut's Enhanced UI
-COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~override/TOOLFONT.ttf~
+COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~override/TOOLFONT.ttf~
 
-COPY ~bgeetextpack/M_RusFnt.lua~   ~override/M_RusFnt.lua~
+COPY ~bgeetextpackeetnames/M_RusFnt.lua~   ~override/M_RusFnt.lua~
 
 BEGIN ~Complete Russian fonts set in lang/ru_RU/fonts~
 MKDIR ~lang/ru_RU/fonts~
 
 // BG1:EE fonts
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/NORMAL.ttf~
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/POSTANTI.ttf~
-COPY ~bgeetextpack/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/REALMS.ttf~
-COPY ~bgeetextpack/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/MODESTOM.ttf~
-COPY ~bgeetextpack/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/STONESML.ttf~
-COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLTIP.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/NORMAL.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/POSTANTI.ttf~
+COPY ~bgeetextpackeetnames/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/REALMS.ttf~
+COPY ~bgeetextpackeetnames/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/MODESTOM.ttf~
+COPY ~bgeetextpackeetnames/fonts/STONESML.ttf~   ~lang/ru_RU/fonts/STONESML.ttf~
+COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLTIP.ttf~
 
 // SoD fonts
-COPY ~bgeetextpack/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/SHERWOOD.ttf~
+COPY ~bgeetextpackeetnames/fonts/REALMS.ttf~   ~lang/ru_RU/fonts/SHERWOOD.ttf~
 
 // IWD:EE fonts. There is no Russian STONEBIG in set, so just copy of NORMAL
-COPY ~bgeetextpack/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/STONEBIG.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/STONEBIG.ttf~
 
 // Used in Dragonspear UI++
-COPY ~bgeetextpack/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
+COPY ~bgeetextpackeetnames/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
 
 // Used in lefreut's Enhanced UI
-COPY ~bgeetextpack/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLFONT.ttf~
+COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~lang/ru_RU/fonts/TOOLFONT.ttf~
 
-COPY ~bgeetextpack/M_RusFnt.lua~   ~override/M_RusFnt.lua~
+COPY ~bgeetextpackeetnames/M_RusFnt.lua~   ~override/M_RusFnt.lua~
 
 BEGIN ~Remove Russian soundset to hear only English voices in the game~
 
