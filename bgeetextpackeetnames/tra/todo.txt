@@ -1,0 +1,2 @@
+* Compare and fix school magic names (and types of the wizards), how is in Si1ver's BG2 translation
+* Compare and fix aligments (e.g lawful), how is in Si1ver's BG2 translation
