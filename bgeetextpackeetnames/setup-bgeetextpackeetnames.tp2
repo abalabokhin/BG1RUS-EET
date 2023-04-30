@@ -351,6 +351,7 @@ COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/STONEBIG.ttf~
 
 // Used in Dragonspear UI++
 COPY ~bgeetextpackeetnames/fonts/rgtraj.ttf~   ~lang/ru_RU/fonts/rgtraj.ttf~
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~lang/ru_RU/fonts/rgfont.ttf~
 
 // Used in lefreut's Enhanced UI
 COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~override/TOOLFONT.ttf~
