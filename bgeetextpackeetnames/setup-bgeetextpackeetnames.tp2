@@ -346,6 +346,11 @@ COPY ~bgeetextpackeetnames/fonts/TOOLTIP.ttf~   ~override/TOOLTIP.ttf~
 // SoD fonts
 COPY ~bgeetextpackeetnames/fonts/REALMS.ttf~   ~override/SHERWOOD.ttf~
 
+// Used in Classic-BG-UI
+COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/POSTBOLD.ttf~
+COPY ~bgeetextpackeetnames/fonts/FLOATTXT.ttf~   ~override/FLOATTXT.ttf~
+COPY ~bgeetextpackeetnames/fonts/ELMINSTE.ttf~   ~override/ELMINSTE.ttf~
+
 // IWD:EE fonts. There is no Russian STONEBIG in set, so just copy of NORMAL
 COPY ~bgeetextpackeetnames/fonts/NORMAL.ttf~   ~override/STONEBIG.ttf~
 
